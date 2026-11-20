@@ -62,9 +62,14 @@ button { font: inherit; color: inherit; }
 .preloader__sky { position: absolute; animation: fadeIn 1s ease both, twinkle 3s ease-in-out 1s infinite alternate; }
 .preloader__wheel {
   position: absolute; width: min(110vmin, 900px); aspect-ratio: 1;
-  background: var(--wheel) center / contain no-repeat;
   opacity: 0;
-  animation: wheelIn 2.6s var(--ease) .2s forwards, spin 60s linear 2.8s infinite;
+  animation: wheelIn 2.6s var(--ease) .2s forwards;
+}
+.preloader__ring, .preloader__center { position: absolute; inset: 0; }
+.preloader__center { background: var(--wheel-center) center / contain no-repeat; }
+.preloader__ring {
+  background: var(--wheel-ring) center / contain no-repeat;
+  animation: ringIn 2.6s var(--ease) .2s both, spin 60s linear 2.8s infinite;
 }
 .preloader__logo {
   position: relative; width: min(78vw, 620px); aspect-ratio: 1640 / 721;
@@ -98,9 +103,10 @@ button { font: inherit; color: inherit; }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes wheelIn {
-  from { opacity: 0; transform: scale(.55) rotate(-50deg); }
-  to   { opacity: .22; transform: scale(1) rotate(0deg); }
+  from { opacity: 0; transform: scale(.55); }
+  to   { opacity: .22; transform: scale(1); }
 }
+@keyframes ringIn { from { transform: rotate(-70deg); } to { transform: rotate(0deg); } }
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes logoReveal {
   0%   { clip-path: inset(0 100% 0 0); filter: blur(10px); opacity: 0; transform: translateY(14px); }
@@ -112,8 +118,58 @@ button { font: inherit; color: inherit; }
 /* ——— Contenido ——— */
 .hero, main, .footer { position: relative; z-index: 1; }
 .hero {
-  text-align: center; padding: clamp(40px, 8vw, 88px) 16px 24px;
+  text-align: center; padding: clamp(40px, 8vw, 88px) 16px 32px;
   max-width: 820px; margin: 0 auto;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+
+/* CTA «Elige tu signo» con invitación a deslizar */
+.cta {
+  margin-top: clamp(32px, 6vh, 64px);
+  display: inline-flex; flex-direction: column; align-items: center; gap: 14px;
+  text-decoration: none; color: var(--gold-light); -webkit-tap-highlight-color: transparent;
+}
+.cta__label {
+  font-family: var(--f-title); font-weight: 600; font-size: clamp(.95rem, 2.4vw, 1.15rem);
+  letter-spacing: .24em; text-transform: uppercase;
+  padding: 14px 28px; border: 1px solid var(--gold); border-radius: 999px;
+  background: rgba(197,175,95,.06);
+  animation: ctaGlow 2.4s ease-in-out infinite;
+  transition: background-color .3s, color .3s;
+}
+.cta:hover .cta__label, .cta:focus-visible .cta__label { background: var(--gold); color: var(--black); }
+.cta:focus-visible { outline: none; }
+.cta:focus-visible .cta__label { outline: 2px solid var(--gold-light); outline-offset: 4px; }
+.cta__scroll {
+  position: relative; width: 24px; height: 38px; border: 1.5px solid var(--gold); border-radius: 12px;
+}
+.cta__dot {
+  position: absolute; left: 50%; top: 7px; width: 4px; height: 8px; margin-left: -2px;
+  border-radius: 2px; background: var(--gold-light);
+  animation: scrollDot 1.8s var(--ease) infinite;
+}
+.cta__chevrons { display: grid; justify-items: center; margin-top: -6px; }
+.cta__chevrons i {
+  width: 12px; height: 12px; border-right: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold);
+  transform: rotate(45deg); margin-top: -4px; opacity: 0;
+  animation: chevron 1.8s ease-in-out infinite;
+}
+.cta__chevrons i:nth-child(2) { animation-delay: .2s; }
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(236,217,156,0); }
+  50% { box-shadow: 0 0 26px 2px rgba(236,217,156,.28); }
+}
+@keyframes scrollDot {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  70% { transform: translateY(14px); opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes chevron {
+  0% { opacity: 0; transform: translateY(-6px) rotate(45deg); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(6px) rotate(45deg); }
 }
 .hero__logo { width: min(68vw, 420px); margin: 0 auto 28px; }
 .kicker {
@@ -136,11 +192,19 @@ button { font: inherit; color: inherit; }
   font-size: clamp(1.2rem, 3vw, 1.6rem); letter-spacing: .12em; text-transform: uppercase; margin: 0 0 20px;
 }
 
-/* Rueda interactiva */
-.picker { padding: 24px 16px 64px; max-width: 1100px; margin: 0 auto; }
-.wheel {
-  position: relative; width: min(88vw, 560px); aspect-ratio: 1; margin: 0 auto 40px;
+/* Rueda interactiva — la sección ocupa una pantalla y su contenido queda centrado */
+.picker {
+  padding: 32px 16px; max-width: 1200px; margin: 0 auto;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
 }
+.picker__layout { display: grid; gap: 32px; justify-items: center; align-items: center; }
+.picker__layout .signs { width: 100%; }
+.wheel {
+  --wheel-size: min(88vw, 560px);
+  position: relative; width: var(--wheel-size); aspect-ratio: 1; margin: 12px auto 0;
+}
+.wheel__center { position: absolute; inset: 0; width: 100%; height: 100%; }
 .wheel::before {
   content: ""; position: absolute; inset: -8%; border-radius: 50%;
   background: radial-gradient(circle, rgba(197,175,95,.16), transparent 62%);
@@ -229,6 +293,27 @@ button { font: inherit; color: inherit; }
 .footer__title { margin: 0; font-family: var(--f-title); color: var(--gold-light); font-size: .95rem; letter-spacing: .06em; }
 .footer__by { margin: 0; color: var(--muted); font-size: 1rem; }
 
+/* Tablet vertical: rueda arriba y 12 signos en 2 filas de 6 (cabe en una pantalla) */
+@media (min-width: 640px) {
+  .wheel { --wheel-size: min(70vw, calc(100svh - 360px), 560px); }
+  .picker__layout { gap: 28px; }
+  .signs { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+  .sign { padding: 12px 4px 10px; }
+  .sign__glyph { font-size: 1.8rem; }
+  .sign__name { font-size: .74rem; letter-spacing: .04em; }
+  .sign__dates { font-size: .78rem; }
+}
+/* Tablet horizontal y escritorio: rueda a la izquierda, signos a la derecha (3×4) */
+@media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+  .picker__layout { grid-template-columns: auto minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); }
+  .wheel { --wheel-size: min(46vw, calc(100svh - 170px), 600px); margin: 0; }
+  .signs { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 520px; justify-self: start; }
+  .sign { padding: 14px 8px 12px; }
+  .sign__glyph { font-size: 2rem; }
+  .sign__name { font-size: .88rem; letter-spacing: .06em; }
+  .sign__dates { font-size: .85rem; }
+}
+
 @media (min-width: 860px) {
   .result__grid { grid-template-columns: 380px minmax(0, 1fr); }
   .result__body { text-align: left; }
@@ -248,4 +333,5 @@ button { font: inherit; color: inherit; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
   .preloader__logo-art { clip-path: none; filter: none; opacity: 1; }
   .preloader__wheel { opacity: .22; }
+  .cta__chevrons i { opacity: 1; }
 }

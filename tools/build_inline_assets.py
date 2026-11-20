@@ -5,6 +5,7 @@ from pathlib import Path
 from PIL import Image
 A = Path(__file__).resolve().parents[1] / "assets"
 spec = {"logo": ("logo-zodiac-academy.png", 1400, "PNG"), "wheel": ("rueda-zodiacal.png", 1400, "PNG"),
+        "wheelCenter": ("rueda-centro.png", 1400, "PNG"), "wheelRing": ("rueda-anillo.png", 1400, "PNG"),
         "dragon": ("dragon.png", 500, "PNG"), "cover": ("portada-libro.jpg", 400, "JPEG")}
 out = {}
 for key, (fn, w, fmt) in spec.items():

@@ -16,7 +16,10 @@
   <!-- PRELOADER: entrada del logotipo -->
   <div class="preloader" id="preloader" aria-hidden="true">
     <div class="preloader__sky"></div>
-    <div class="preloader__wheel"></div>
+    <div class="preloader__wheel">
+      <div class="preloader__ring"></div>
+      <div class="preloader__center"></div>
+    </div>
     <div class="preloader__logo">
       <div class="preloader__logo-art"></div>
       <div class="preloader__logo-shine"></div>
@@ -31,21 +34,30 @@
     <p class="kicker"><span>Consulta el oráculo de</span></p>
     <h1 class="hero__title">Tu destino está escrito en las estrellas</h1>
     <p class="hero__lead">Elige tu signo en la rueda del libro y descubre lo que la Academia te depara. Después, compártelo en tus redes.</p>
+    <a class="cta" id="ctaPick" href="#picker">
+      <span class="cta__label">Elige tu signo</span>
+      <span class="cta__scroll" aria-hidden="true"><span class="cta__dot"></span></span>
+      <span class="cta__chevrons" aria-hidden="true"><i></i><i></i></span>
+    </a>
   </header>
 
   <main>
-    <section class="picker" aria-labelledby="picker-title">
+    <section class="picker" id="picker" aria-labelledby="picker-title">
       <h2 id="picker-title" class="section-title">Elige tu signo</h2>
 
-      <div class="wheel" id="wheel">
-        <div class="wheel__rot" id="wheelRot">
-          <img class="wheel__img" data-asset="wheel" alt="">
-          <div class="wheel__spots" id="wheelSpots"></div>
+      <div class="picker__layout">
+        <div class="wheel" id="wheel">
+          <!-- Centro fijo (gemelas) debajo; el anillo de signos gira encima -->
+          <img class="wheel__center" data-asset="wheelCenter" alt="">
+          <div class="wheel__rot" id="wheelRot">
+            <img class="wheel__img" data-asset="wheelRing" alt="">
+            <div class="wheel__spots" id="wheelSpots"></div>
+          </div>
+          <div class="wheel__pointer" aria-hidden="true"></div>
         </div>
-        <div class="wheel__pointer" aria-hidden="true"></div>
-      </div>
 
-      <ul class="signs" id="signs" role="list"></ul>
+        <ul class="signs" id="signs" role="list"></ul>
+      </div>
     </section>
 
     <section class="result" id="result" hidden aria-live="polite">

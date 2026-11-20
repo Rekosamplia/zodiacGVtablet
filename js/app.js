@@ -7,7 +7,8 @@
   document.querySelectorAll("[data-asset]").forEach((img) => { img.src = A[img.dataset.asset]; });
   const root = document.documentElement.style;
   root.setProperty("--logo", `url("${A.logo}")`);
-  root.setProperty("--wheel", `url("${A.wheel}")`);
+  root.setProperty("--wheel-center", `url("${A.wheelCenter}")`);
+  root.setProperty("--wheel-ring", `url("${A.wheelRing}")`);
 
   // ——— Preloader: mínimo 3,4 s de animación y espera a fuentes/imágenes ———
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -85,5 +86,13 @@
       await navigator.share({ files: [file], title: `Mi horóscopo Zodiac Academy: ${current.name}`, text: "Consulta el oráculo de Zodiac Academy ✦ #ZodiacAcademy" });
     } catch (e) { /* cancelado por el usuario */ }
   });
-  $("btnAgain").addEventListener("click", () => $("picker-title").scrollIntoView({ behavior: reduce ? "auto" : "smooth" }));
+  // Baja a la sección de la rueda dejándola centrada en pantalla
+  // (si en móvil es más alta que la pantalla, la alinea arriba).
+  function goToPicker() {
+    const sec = $("picker");
+    const fits = sec.offsetHeight <= window.innerHeight + 2;
+    sec.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: fits ? "center" : "start" });
+  }
+  $("ctaPick").addEventListener("click", (e) => { e.preventDefault(); goToPicker(); });
+  $("btnAgain").addEventListener("click", goToPicker);
 })();

@@ -52,6 +52,12 @@ d = np.sqrt(xx ** 2 + yy ** 2)
 a *= np.clip((R - d) / 25, 0, 1)
 to_rgba(a).save(OUT / "rueda-zodiacal.png", optimize=True)
 
+# 2b) Rueda partida: centro fijo (gemelas + anillo punteado) y anillo giratorio (signos)
+SPLIT = 542.5  # radio del hueco entre el anillo punteado y la banda de signos
+cut = np.clip((SPLIT - d) / 1.5 + 0.5, 0, 1)
+to_rgba(a * cut).save(OUT / "rueda-centro.png", optimize=True)
+to_rgba(a * (1 - cut)).save(OUT / "rueda-anillo.png", optimize=True)
+
 # 3) Dragón (silueta negra de la portada -> dorado). Se descartan las letras que tocan el borde.
 cov = np.asarray(Image.open(TEX / "libro/LIBRO_PORTADA.png").convert("RGB")).astype(np.float32)
 box = cov[1440:1680, 1090:1420]
@@ -71,5 +77,5 @@ dr.resize((dr.width * 3, dr.height * 3), Image.LANCZOS).save(OUT / "dragon.png",
 cover = Image.open(TEX / "libro/LIBRO_PORTADA.png").convert("RGB")
 cover.crop((0, 0, 1528, 2448)).resize((764, 1224), Image.LANCZOS).save(OUT / "portada-libro.jpg", quality=90)
 
-for f in sorted(OUT.iterdir()):
+for f in sorted(OUT.glob("*.[pj][np]g")):
     print(f.name, Image.open(f).size)
