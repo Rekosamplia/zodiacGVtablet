@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oráculo Zodiac Academy</title>
+  <meta name="description" content="Consulta el oráculo de Zodiac Academy: elige tu signo y comparte tu horóscopo.">
+  <meta name="theme-color" content="#0b0a09">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Noto+Sans+Symbols:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="is-loading">
+
+  <!-- PRELOADER: entrada del logotipo -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__sky"></div>
+    <div class="preloader__wheel"></div>
+    <div class="preloader__logo">
+      <div class="preloader__logo-art"></div>
+      <div class="preloader__logo-shine"></div>
+    </div>
+    <p class="preloader__tag">Consultando a las estrellas…</p>
+  </div>
+
+  <div class="sky" aria-hidden="true"></div>
+
+  <header class="hero">
+    <img class="hero__logo" data-asset="logo" alt="Zodiac Academy">
+    <p class="kicker"><span>Consulta el oráculo de</span></p>
+    <h1 class="hero__title">Tu destino está escrito en las estrellas</h1>
+    <p class="hero__lead">Elige tu signo en la rueda del libro y descubre lo que la Academia te depara. Después, compártelo en tus redes.</p>
+  </header>
+
+  <main>
+    <section class="picker" aria-labelledby="picker-title">
+      <h2 id="picker-title" class="section-title">Elige tu signo</h2>
+
+      <div class="wheel" id="wheel">
+        <div class="wheel__rot" id="wheelRot">
+          <img class="wheel__img" data-asset="wheel" alt="">
+          <div class="wheel__spots" id="wheelSpots"></div>
+        </div>
+        <div class="wheel__pointer" aria-hidden="true"></div>
+      </div>
+
+      <ul class="signs" id="signs" role="list"></ul>
+    </section>
+
+    <section class="result" id="result" hidden aria-live="polite">
+      <div class="result__grid">
+        <div class="result__preview">
+          <canvas id="card" aria-label="Pieza para redes sociales con tu horóscopo"></canvas>
+          <p class="result__format">Formato Story 1080 × 1920 px</p>
+        </div>
+        <div class="result__body">
+          <p class="kicker"><span>Tu horóscopo</span></p>
+          <h2 class="result__name"><span class="result__glyph" id="rGlyph"></span><span id="rName"></span></h2>
+          <p class="result__meta" id="rMeta"></p>
+          <p class="result__text" id="rText"></p>
+          <div class="result__actions">
+            <button class="btn btn--gold" id="btnDownload" type="button">Descargar imagen</button>
+            <button class="btn" id="btnShare" type="button">Compartir</button>
+          </div>
+          <button class="link" id="btnAgain" type="button">← Elegir otro signo</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img class="footer__cover" data-asset="cover" alt="Portada de Zodiac Academy 1: El despertar">
+    <div>
+      <p class="footer__title">Zodiac Academy 1 · El despertar</p>
+      <p class="footer__by">Caroline Peckham &amp; Susanne Valenti · Crossbooks</p>
+    </div>
+  </footer>
+
+  <script src="assets/assets-inline.js"></script>
+  <script src="js/signs.js"></script>
+  <script src="js/card.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

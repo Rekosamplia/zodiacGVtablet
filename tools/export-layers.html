@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Export capas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Uso interno: renderiza cada capa de la pieza social por separado (PNG transparente)
+       y vuelca el resultado en JSON dentro de #out para tools/build_psd.py -->
+  <pre id="out">PENDING</pre>
+  <script src="../assets/assets-inline.js"></script>
+  <script src="../js/signs.js"></script>
+  <script src="../js/card.js"></script>
+  <script>
+    (async () => {
+      await ZACard.ready();
+      const c = document.createElement("canvas");
+      const png = () => c.toDataURL("image/png");
+      const result = { size: [ZACard.W, ZACard.H], layers: ZACard.LAYERS.map(l => ({ id: l.id, name: l.name, perSign: !!l.perSign })), common: {}, signs: {}, full: {} };
+      for (const L of ZACard.LAYERS.filter(l => !l.perSign)) { ZACard.render(c, ZA_SIGNS[0], { only: L.id }); result.common[L.id] = png(); }
+      for (const s of ZA_SIGNS) {
+        result.signs[s.id] = { name: s.name, layers: {} };
+        for (const L of ZACard.LAYERS.filter(l => l.perSign)) { ZACard.render(c, s, { only: L.id }); result.signs[s.id].layers[L.id] = png(); }
+        ZACard.render(c, s); result.full[s.id] = png();
+      }
+      document.getElementById("out").textContent = JSON.stringify(result);
+    })().catch(e => { document.getElementById("out").textContent = "ERROR " + e; });
+  </script>
+</body>
+</html>

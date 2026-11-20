@@ -1,0 +1,28 @@
+// Datos de los 12 signos. `angle` = posición del glifo en la rueda del libro
+// (grados de pantalla: 0 = derecha, 90 = abajo). La rueda de la portada va en sentido inverso.
+window.ZA_SIGNS = [
+  { id: "aries", name: "Aries", glyph: "♈", dates: "21 marzo – 19 abril", element: "Fuego", angle: -30,
+    text: "Tu fuego arde con más fuerza que nunca. La Academia pondrá a prueba tu paciencia, pero no tu valor: canaliza esa energía antes de lanzarte al duelo. Una alianza inesperada te recordará que hasta la llama más salvaje necesita aire para brillar." },
+  { id: "tauro", name: "Tauro", glyph: "♉", dates: "20 abril – 20 mayo", element: "Tierra", angle: -60,
+    text: "La tierra bajo tus pies se mantiene firme mientras todo a tu alrededor tiembla. Confía en tu instinto con los secretos que te cuenten: no todos los que sonríen en los pasillos de la Academia buscan tu bien. La constancia será tu mejor hechizo." },
+  { id: "geminis", name: "Géminis", glyph: "♊", dates: "21 mayo – 20 junio", element: "Aire", angle: -90,
+    text: "Dos caminos se abren ante ti y las estrellas aún no te piden elegir. Tu mente es tan rápida como el viento: úsala para leer entre líneas. Alguien muy cercano guarda una verdad que cambiará la forma en que miras tu propio reflejo." },
+  { id: "cancer", name: "Cáncer", glyph: "♋", dates: "21 junio – 22 julio", element: "Agua", angle: 240,
+    text: "Las mareas de tu magia suben con la luna creciente. Protege a los tuyos, pero no olvides protegerte a ti: una emoción que llevas tiempo guardando pide salir a la superficie. Cuando lo haga, descubrirás un poder que no sabías que tenías." },
+  { id: "leo", name: "Leo", glyph: "♌", dates: "23 julio – 22 agosto", element: "Fuego", angle: 210,
+    text: "Los focos de la Academia te buscan y tú sabes brillar bajo ellos. Aun así, el verdadero liderazgo se demuestra en las sombras: un gesto discreto hacia quien menos lo espera te abrirá una puerta que el orgullo mantenía cerrada." },
+  { id: "virgo", name: "Virgo", glyph: "♍", dates: "23 agosto – 22 septiembre", element: "Tierra", angle: 180,
+    text: "Tu precisión es un arma que pocos ven venir. Un detalle que nadie más ha notado te dará ventaja en clase y fuera de ella. Deja algo de espacio al caos: no todo lo que escapa a tu control es una amenaza." },
+  { id: "libra", name: "Libra", glyph: "♎", dates: "23 septiembre – 22 octubre", element: "Aire", angle: 150,
+    text: "Buscas el equilibrio en una Academia que vive de los extremos. Una decisión entre la lealtad y la justicia llamará a tu puerta: escucha a ambas partes, pero no dejes que tu voz se pierda. El aire te dará claridad al amanecer." },
+  { id: "escorpio", name: "Escorpio", glyph: "♏", dates: "23 octubre – 21 noviembre", element: "Agua", angle: 120,
+    text: "Las aguas profundas guardan tu mayor fuerza. Alguien intentará descifrar tus secretos, y quizá sea momento de compartir uno. La intensidad que asusta a otros será justo lo que atraiga a la persona adecuada a tu órbita." },
+  { id: "sagitario", name: "Sagitario", glyph: "♐", dates: "22 noviembre – 21 diciembre", element: "Fuego", angle: 90,
+    text: "Tu flecha apunta más lejos de lo que nadie imagina. Las estrellas favorecen la aventura: explora rincones de la Academia que aún no conoces y responde a la llamada de lo desconocido. Una lección inesperada llegará de un rival." },
+  { id: "capricornio", name: "Capricornio", glyph: "♑", dates: "22 diciembre – 19 enero", element: "Tierra", angle: 60,
+    text: "Escalas con paso firme mientras otros se distraen. Tu ambición está alineada con los astros, pero recuerda que incluso las montañas descansan. Un aliado al que subestimabas tendrá la llave de tu próximo ascenso." },
+  { id: "acuario", name: "Acuario", glyph: "♒", dates: "20 enero – 18 febrero", element: "Aire", angle: 30,
+    text: "Tus ideas soplan a contracorriente y eso incomoda a quienes prefieren las viejas normas. No te detengas: la Academia necesita mentes como la tuya. Un encuentro bajo las estrellas te recordará que ser diferente es tu mayor poder." },
+  { id: "piscis", name: "Piscis", glyph: "♓", dates: "19 febrero – 20 marzo", element: "Agua", angle: 0,
+    text: "Tus sueños hablan más claro que nunca: atiende a las señales que aparecen al cerrar los ojos. Tu intuición te guiará entre las mentiras de la Academia. Deja que tu compasión fluya, pero marca límites con quien solo sabe tomar." },
+];
