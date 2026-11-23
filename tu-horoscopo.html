@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tu horóscopo semanal · Zodiac Academy</title>
+  <meta name="theme-color" content="#0b0a09">
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=4">
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <main class="mobile">
+    <p class="kicker"><span>Tu horóscopo semanal</span></p>
+    <h1 class="mobile__name" id="mName"></h1>
+    <div class="mobile__actions">
+      <button class="btn btn--gold" id="mShare" type="button" hidden>Compartir en redes</button>
+      <a class="btn btn--gold" id="mSave" href="#">Guardar imagen</a>
+    </div>
+    <p class="mobile__hint">¿No se guarda? Mantén pulsada la imagen y elige «Guardar en Fotos» o «Descargar imagen».</p>
+    <img class="mobile__card" id="mCard" alt="" width="1080" height="1920">
+    <a class="link" href="index.html">Consulta otro signo</a>
+  </main>
+  <script src="js/signs.js?v=2"></script>
+  <script src="js/movil.js?v=2"></script>
+</body>
+</html>

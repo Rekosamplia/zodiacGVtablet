@@ -60,6 +60,11 @@
     $("rMeta").textContent = `${s.dates} · Elemento ${s.element}`;
     $("rText").textContent = s.text;
     $("btnShare").hidden = !canShareFiles();
+    // QR que abre la imagen de este signo en el móvil del usuario
+    const cfg = window.ZA_CONFIG || {};
+    const qrUrl = new URL(`tu-horoscopo.html?signo=${s.id}`, cfg.publicUrl || location.href).href;
+    window.ZAQR.toCanvas($("qr"), qrUrl, { scale: 8, margin: 3 });
+    $("qr").dataset.url = qrUrl;
 
     await window.ZACard.ready();
     window.ZACard.render(canvas, s);

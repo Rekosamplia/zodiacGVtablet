@@ -312,6 +312,38 @@ button { font: inherit; color: inherit; }
 .btn:hover { background: rgba(197,175,95,.14); }
 .btn--gold { background: var(--gold); color: var(--black); }
 .btn--gold:hover { background: var(--gold-light); box-shadow: 0 0 24px rgba(236,217,156,.35); }
+/* QR para llevarse la imagen al móvil */
+.qr {
+  display: flex; align-items: center; gap: 18px; text-align: left;
+  max-width: 470px; margin: 6px auto 16px; padding: 14px;
+  border: 1px solid var(--gold-dim); background: rgba(197,175,95,.05);
+}
+.qr__code { flex: none; width: 128px; height: 128px; image-rendering: pixelated; border-radius: 4px; }
+.qr__title {
+  margin: 0 0 6px; font-family: var(--f-title); font-weight: 600; font-size: .82rem;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--gold-light);
+}
+.qr__text { margin: 0; font-size: 1.02rem; line-height: 1.4; color: var(--muted); }
+/* en un móvil no tiene sentido escanear su propia pantalla: ahí basta Descargar/Compartir */
+@media (max-width: 639px) { .qr { display: none; } }
+
+/* Página del QR (tu-horoscopo.html) */
+.mobile {
+  position: relative; z-index: 1; max-width: 480px; margin: 0 auto;
+  padding: 24px 16px 40px; text-align: center;
+}
+.mobile .link { display: inline-block; margin-top: 4px; }
+.mobile__name { font-family: var(--f-title); font-weight: 700; color: var(--gold); font-size: 2rem; margin: 0 0 18px; line-height: 1.1; }
+.mobile__card {
+  width: min(100%, 360px); height: auto; margin: 0 auto 20px;
+  border: 1px solid var(--gold-dim); box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 60px rgba(197,175,95,.12);
+  -webkit-touch-callout: default;
+}
+.mobile__actions { display: grid; gap: 12px; max-width: 360px; margin: 0 auto 12px; }
+.mobile__actions .btn[hidden] { display: none; }
+.mobile__actions .btn { display: flex; align-items: center; justify-content: center; text-decoration: none; }
+.mobile__hint { font-size: .95rem; color: var(--muted); margin: 0 auto 14px; max-width: 340px; line-height: 1.4; }
+
 .link { background: none; border: 0; cursor: pointer; color: var(--muted); text-decoration: underline; text-underline-offset: 4px; padding: 8px; }
 .link:hover { color: var(--gold-light); }
 
@@ -348,6 +380,7 @@ button { font: inherit; color: inherit; }
   .result__grid { grid-template-columns: 380px minmax(0, 1fr); }
   .result__body { text-align: left; }
   .result__body .kicker, .result__name, .result__actions { justify-content: flex-start; }
+  .qr { margin-inline: 0; }
 }
 @media (max-width: 520px) {
   body { font-size: 1.1rem; }

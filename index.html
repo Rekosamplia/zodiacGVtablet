@@ -6,10 +6,14 @@
   <title>Oráculo Zodiac Academy</title>
   <meta name="description" content="Consulta el oráculo de Zodiac Academy: elige tu signo y comparte tu horóscopo.">
   <meta name="theme-color" content="#0b0a09">
+  <link rel="icon" href="assets/favicon/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/favicon-192.png">
+  <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Noto+Sans+Symbols:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body class="is-loading">
 
@@ -78,6 +82,13 @@
             <button class="btn btn--gold" id="btnDownload" type="button">Descargar imagen</button>
             <button class="btn" id="btnShare" type="button">Compartir</button>
           </div>
+          <div class="qr" id="qrBox">
+            <canvas class="qr__code" id="qr" role="img" aria-label="Código QR para abrir la imagen en el móvil"></canvas>
+            <div>
+              <p class="qr__title">Llévatela en tu móvil</p>
+              <p class="qr__text">Escanea el código con la cámara y guárdala o compártela en Instagram, TikTok o WhatsApp.</p>
+            </div>
+          </div>
           <button class="link" id="btnAgain" type="button">← Elegir otro signo</button>
         </div>
       </div>
@@ -92,9 +103,11 @@
     </div>
   </footer>
 
-  <script src="assets/assets-inline.js"></script>
-  <script src="js/signs.js"></script>
-  <script src="js/card.js"></script>
-  <script src="js/app.js"></script>
+  <script src="assets/assets-inline.js?v=2"></script>
+  <script src="js/signs.js?v=2"></script>
+  <script src="js/card.js?v=2"></script>
+  <script src="js/config.js?v=2"></script>
+  <script src="js/qr.js?v=2"></script>
+  <script src="js/app.js?v=2"></script>
 </body>
 </html>
