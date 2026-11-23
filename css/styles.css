@@ -25,6 +25,7 @@ body {
   overflow-x: hidden;
 }
 body.is-loading { overflow: hidden; }
+html { overflow-x: hidden; overflow-x: clip; } /* las estrellas del logo sobresalen en móvil */
 img { max-width: 100%; display: block; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
@@ -171,7 +172,23 @@ button { font: inherit; color: inherit; }
   50% { opacity: 1; }
   100% { opacity: 0; transform: translateY(6px) rotate(45deg); }
 }
-.hero__logo { width: min(68vw, 420px); margin: 0 auto 28px; }
+.hero__brand { position: relative; margin: 0 auto 28px; }
+.hero__logo { position: relative; width: min(68vw, 420px); }
+/* Estrellas del vector alrededor del logotipo: más tenues detrás de las letras
+   y desvaneciéndose hacia los bordes para no recargar la portada */
+.hero__stars {
+  position: absolute; left: 50%; top: 50%; z-index: -1;
+  width: max(min(120vw, 1600px), 760px); aspect-ratio: 2508 / 1412;
+  transform: translate(-50%, -50%);
+  background: var(--stars) center / cover no-repeat;
+  -webkit-mask-image: radial-gradient(closest-side, rgba(0,0,0,.25) 22%, #000 45%, rgba(0,0,0,.6) 72%, transparent 100%);
+          mask-image: radial-gradient(closest-side, rgba(0,0,0,.25) 22%, #000 45%, rgba(0,0,0,.6) 72%, transparent 100%);
+  opacity: 1;
+  animation: starsIn 2.4s var(--ease) both, starsBreath 7s ease-in-out 2.4s infinite alternate;
+  pointer-events: none;
+}
+@keyframes starsIn { from { opacity: 0; transform: translate(-50%, -50%) scale(.94); } }
+@keyframes starsBreath { from { opacity: 1; } to { opacity: .7; } }
 .kicker {
   display: flex; align-items: center; justify-content: center; gap: 14px; margin: 0 0 10px;
   font-family: var(--f-title); font-weight: 600; font-size: .78rem; letter-spacing: .32em;
@@ -197,6 +214,19 @@ button { font: inherit; color: inherit; }
   padding: 32px 16px; max-width: 1200px; margin: 0 auto;
   min-height: 100vh; min-height: 100svh;
   display: flex; flex-direction: column; justify-content: center;
+  position: relative; isolation: isolate;
+}
+/* Estrellas del vector de fondo en la sección de signos (volteadas para no
+   repetir la composición del logotipo); más tenues detrás de la rueda y
+   desvanecidas arriba y abajo para fundirse con la portada y el resultado */
+.picker::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  top: 0; bottom: 0; left: 50%; width: 100vw;
+  transform: translateX(-50%) scaleX(-1);
+  background: var(--stars) center / max(100%, 1100px) auto repeat-y;
+  -webkit-mask-image: radial-gradient(farthest-side, rgba(0,0,0,.4) 0 18%, #000 50%, rgba(0,0,0,.55) 80%, transparent 100%);
+          mask-image: radial-gradient(farthest-side, rgba(0,0,0,.4) 0 18%, #000 50%, rgba(0,0,0,.55) 80%, transparent 100%);
+  animation: starsBreath 8s ease-in-out infinite alternate-reverse;
 }
 .picker__layout { display: grid; gap: 32px; justify-items: center; align-items: center; }
 .picker__layout .signs { width: 100%; }
@@ -236,12 +266,12 @@ button { font: inherit; color: inherit; }
 }
 .sign {
   width: 100%; display: grid; justify-items: center; gap: 2px; padding: 16px 8px 14px;
-  background: linear-gradient(180deg, rgba(197,175,95,.06), rgba(197,175,95,.02));
+  background: linear-gradient(180deg, rgba(197,175,95,.06), rgba(197,175,95,.02)), rgba(11,10,9,.82); /* tapa las estrellas del fondo */
   border: 1px solid var(--gold-dim); border-radius: 4px; cursor: pointer;
   transition: border-color .25s, background-color .25s, transform .25s var(--ease);
 }
 .sign:hover { border-color: var(--gold); transform: translateY(-2px); }
-.sign.is-active { border-color: var(--gold-light); background: rgba(197,175,95,.14); }
+.sign.is-active { border-color: var(--gold-light); background: linear-gradient(rgba(197,175,95,.14), rgba(197,175,95,.14)), rgba(11,10,9,.82); }
 .sign__glyph { font-family: var(--f-glyph); font-size: 2.1rem; line-height: 1.2; color: var(--gold); }
 .sign__name { font-family: var(--f-title); font-weight: 600; font-size: .95rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-light); }
 .sign__dates { font-size: .85rem; color: var(--muted); line-height: 1.3; text-align: center; }

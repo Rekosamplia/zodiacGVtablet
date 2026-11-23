@@ -9,6 +9,7 @@
   root.setProperty("--logo", `url("${A.logo}")`);
   root.setProperty("--wheel-center", `url("${A.wheelCenter}")`);
   root.setProperty("--wheel-ring", `url("${A.wheelRing}")`);
+  root.setProperty("--stars", `url("${A.stars}")`);
 
   // ——— Preloader: mínimo 3,4 s de animación y espera a fuentes/imágenes ———
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;

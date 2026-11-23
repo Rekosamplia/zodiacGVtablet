@@ -8,6 +8,7 @@
 ## Regenerar assets / PSD
 ```bash
 python3 tools/extract_assets.py        # recorta logo, rueda, dragón y portada de ../tex
+python3 tools/extract_stars.py         # estrellas del vector ESTRELLAS ZODIAC VECTOR/fondo_estrellas.ai (aclaradas)
 python3 tools/build_inline_assets.py   # regenera assets/assets-inline.js
 python3 -m http.server 8765            # en otra terminal, desde esta carpeta
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --virtual-time-budget=20000 \

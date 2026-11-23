@@ -106,9 +106,9 @@
       const im = images.logo, w = 600, h = w * im.height / im.width;
       ctx.drawImage(im, (W - w) / 2, 130, w, h);
     } },
-    { id: "kicker", name: "Titular «Tu horóscopo»", draw(ctx) {
+    { id: "kicker", name: "Titular «Tu horóscopo semanal»", draw(ctx) {
       ctx.fillStyle = GOLD_LIGHT; ctx.font = `600 28px ${F_TITLE}`; ctx.textBaseline = "middle";
-      const tw = spaced(ctx, "TU HORÓSCOPO", 540, 455, 9);
+      const tw = spaced(ctx, "TU HORÓSCOPO SEMANAL", 540, 455, 9);
       divider(ctx, 540, 455, tw / 2 + 120, tw / 2 + 26);
     } },
     { id: "rueda", name: "Rueda zodiacal (libro)", draw(ctx) {
