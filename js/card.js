@@ -148,17 +148,22 @@
       const lh = (size + 1) * 1.34;
       lines.forEach((l, i) => ctx.fillText(l, 540, 1360 + i * lh));
     } },
-    { id: "portada", name: "Portada del libro", draw(ctx) {
-      const w = 104, h = w * images.cover.height / images.cover.width, x = 236, y = 1686;
-      ctx.save(); ctx.shadowColor = "rgba(197,175,95,.35)"; ctx.shadowBlur = 24;
-      ctx.drawImage(images.cover, x, y, w, h); ctx.restore();
-      ctx.strokeStyle = GOLD; ctx.lineWidth = 1.5; ctx.strokeRect(x, y, w, h);
+    { id: "portada", name: "Portadas de los libros 1 y 2", draw(ctx) {
+      const w = 96, gap = 14, y = 1686;
+      [images.cover, images.cover2].forEach((im, i) => {
+        const h = w * im.height / im.width, x = 196 + i * (w + gap);
+        ctx.save(); ctx.shadowColor = "rgba(197,175,95,.35)"; ctx.shadowBlur = 22;
+        ctx.drawImage(im, x, y, w, h); ctx.restore();
+        ctx.strokeStyle = GOLD; ctx.lineWidth = 1.5; ctx.strokeRect(x, y, w, h);
+      });
     } },
     { id: "pie", name: "Texto pie", draw(ctx) {
+      const x = 438;
       ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-      ctx.fillStyle = GOLD_LIGHT; ctx.font = `600 30px ${F_TITLE}`; spaced(ctx, "ZODIAC ACADEMY 1", 372, 1734, 3, "left");
-      ctx.fillStyle = CREAM; ctx.font = `italic 500 34px ${F_TEXT}`; ctx.fillText("El despertar", 372, 1776);
-      ctx.fillStyle = GOLD; ctx.font = `600 22px ${F_TITLE}`; spaced(ctx, "#ZODIACACADEMY", 372, 1826, 4, "left");
+      ctx.fillStyle = GOLD_LIGHT; ctx.font = `600 30px ${F_TITLE}`; spaced(ctx, "ZODIAC ACADEMY", x, 1730, 3, "left");
+      ctx.fillStyle = CREAM; ctx.font = `italic 500 32px ${F_TEXT}`;
+      ctx.fillText("1 · El despertar", x, 1772); ctx.fillText("2 · Despiadados", x, 1808);
+      ctx.fillStyle = GOLD; ctx.font = `600 22px ${F_TITLE}`; spaced(ctx, "#ZODIACACADEMY", x, 1850, 4, "left");
     } },
     { id: "dragon", name: "Dragón", draw(ctx) {
       const w = 150, h = w * images.dragon.height / images.dragon.width;

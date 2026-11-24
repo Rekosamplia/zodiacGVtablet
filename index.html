@@ -10,10 +10,14 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/favicon-192.png">
   <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Noto+Sans+Symbols:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="manifest" href="manifest.webmanifest">
+  <!-- iPhone/iPad: añadida a la pantalla de inicio se abre sin barras del navegador -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Zodiac Academy">
+  <link rel="stylesheet" href="css/fonts.css?v=1">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body class="is-loading">
 
@@ -40,7 +44,7 @@
     </div>
     <p class="kicker"><span>Consulta el oráculo de</span></p>
     <h1 class="hero__title">Tu destino está escrito en las estrellas</h1>
-    <p class="hero__lead">Elige tu signo en la rueda del libro y descubre lo que la Academia te depara. Después, compártelo en tus redes.</p>
+    <p class="hero__lead">Elige tu signo en la rueda del libro y descubre lo que la Academia te depara. <span class="share-only">Después, compártelo en tus redes.</span></p>
     <a class="cta" id="ctaPick" href="#picker">
       <span class="cta__label">Elige tu signo</span>
       <span class="cta__scroll" aria-hidden="true"><span class="cta__dot"></span></span>
@@ -71,14 +75,14 @@
       <div class="result__grid">
         <div class="result__preview">
           <canvas id="card" aria-label="Pieza para redes sociales con tu horóscopo"></canvas>
-          <p class="result__format">Formato Story 1080 × 1920 px</p>
+          <p class="result__format share-only">Formato Story 1080 × 1920 px</p>
         </div>
         <div class="result__body">
           <p class="kicker"><span>Tu horóscopo semanal</span></p>
           <h2 class="result__name"><span class="result__glyph" id="rGlyph"></span><span id="rName"></span></h2>
           <p class="result__meta" id="rMeta"></p>
           <p class="result__text" id="rText"></p>
-          <div class="result__actions">
+          <div class="result__actions share-only">
             <button class="btn btn--gold" id="btnDownload" type="button">Descargar imagen</button>
             <button class="btn" id="btnShare" type="button">Compartir</button>
           </div>
@@ -96,18 +100,22 @@
   </main>
 
   <footer class="footer">
-    <img class="footer__cover" data-asset="cover" alt="Portada de Zodiac Academy 1: El despertar">
+    <div class="footer__covers">
+      <img class="footer__cover" data-asset="cover" alt="Portada de Zodiac Academy 1: El despertar">
+      <img class="footer__cover" data-asset="cover2" alt="Portada de Zodiac Academy 2: Despiadados">
+    </div>
     <div>
       <p class="footer__title">Zodiac Academy 1 · El despertar</p>
+      <p class="footer__title">Zodiac Academy 2 · Despiadados</p>
       <p class="footer__by">Caroline Peckham &amp; Susanne Valenti · Crossbooks</p>
     </div>
   </footer>
 
-  <script src="assets/assets-inline.js?v=2"></script>
+  <script src="js/config.js?v=3"></script>
+  <script src="assets/assets-inline.js?v=3"></script>
   <script src="js/signs.js?v=2"></script>
-  <script src="js/card.js?v=2"></script>
-  <script src="js/config.js?v=2"></script>
+  <script src="js/card.js?v=3"></script>
   <script src="js/qr.js?v=2"></script>
-  <script src="js/app.js?v=2"></script>
+  <script src="js/app.js?v=4"></script>
 </body>
 </html>

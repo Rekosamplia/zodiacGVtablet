@@ -5,6 +5,12 @@
 
   // Imágenes del DOM y máscaras del preloader desde el bundle inline
   document.querySelectorAll("[data-asset]").forEach((img) => { img.src = A[img.dataset.asset]; });
+  // Modo kiosco (tablet en local): sin descargar/compartir; QR solo si hay dirección pública
+  const cfg = window.ZA_CONFIG || {};
+  const showQR = !cfg.kiosk || !!cfg.publicUrl;
+  document.body.classList.toggle("is-kiosk", !!cfg.kiosk);
+  if (!showQR) $("qrBox").remove();
+
   const root = document.documentElement.style;
   root.setProperty("--logo", `url("${A.logo}")`);
   root.setProperty("--wheel-center", `url("${A.wheelCenter}")`);
@@ -61,10 +67,11 @@
     $("rText").textContent = s.text;
     $("btnShare").hidden = !canShareFiles();
     // QR que abre la imagen de este signo en el móvil del usuario
-    const cfg = window.ZA_CONFIG || {};
     const qrUrl = new URL(`tu-horoscopo.html?signo=${s.id}`, cfg.publicUrl || location.href).href;
-    window.ZAQR.toCanvas($("qr"), qrUrl, { scale: 8, margin: 3 });
-    $("qr").dataset.url = qrUrl;
+    if (showQR) {
+      window.ZAQR.toCanvas($("qr"), qrUrl, { scale: 8, margin: 3 });
+      $("qr").dataset.url = qrUrl;
+    }
 
     await window.ZACard.ready();
     window.ZACard.render(canvas, s);
@@ -99,6 +106,36 @@
     const fits = sec.offsetHeight <= window.innerHeight + 2;
     sec.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: fits ? "center" : "start" });
   }
-  $("ctaPick").addEventListener("click", (e) => { e.preventDefault(); goToPicker(); });
-  $("btnAgain").addEventListener("click", goToPicker);
+  let pickerAt = 0;
+  const goPicker = () => { pickerAt = Date.now(); goToPicker(); };
+  $("ctaPick").addEventListener("click", (e) => { e.preventDefault(); goPicker(); });
+  $("btnAgain").addEventListener("click", goPicker);
+
+  // ——— Pantalla completa ———
+  // Los navegadores solo permiten entrar en pantalla completa tras un gesto del
+  // usuario, así que se activa con el primer toque o clic en la landing.
+  // (Instalada en la pantalla de inicio, el manifest ya la abre sin navegador.)
+  const fsEl = document.documentElement;
+  const requestFs = fsEl.requestFullscreen || fsEl.webkitRequestFullscreen;
+  const isFs = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  const installed = matchMedia("(display-mode: fullscreen), (display-mode: standalone)").matches;
+  if (requestFs && !installed) {
+    const enterFs = (e) => {
+      // Compartir/Descargar necesitan el gesto del usuario para sí mismos: ahí no se pide
+      if (e.target.closest && e.target.closest("#btnShare, #btnDownload")) return;
+      document.removeEventListener("click", enterFs, true);
+      document.removeEventListener("keydown", enterFs, true);
+      if (isFs()) return;
+      try {
+        const r = requestFs.call(fsEl, { navigationUI: "hide" });
+        if (r && r.catch) r.catch(() => {});
+      } catch (err) { /* no permitido: se sigue en modo normal */ }
+    };
+    document.addEventListener("click", enterFs, true);
+    document.addEventListener("keydown", enterFs, true);
+    // Al entrar cambia la altura de la pantalla: si se iba a la rueda, se vuelve a centrar
+    const onFsChange = () => { if (Date.now() - pickerAt < 2000) setTimeout(goToPicker, 120); };
+    document.addEventListener("fullscreenchange", onFsChange);
+    document.addEventListener("webkitfullscreenchange", onFsChange);
+  }
 })();

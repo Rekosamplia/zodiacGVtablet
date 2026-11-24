@@ -312,6 +312,9 @@ button { font: inherit; color: inherit; }
 .btn:hover { background: rgba(197,175,95,.14); }
 .btn--gold { background: var(--gold); color: var(--black); }
 .btn--gold:hover { background: var(--gold-light); box-shadow: 0 0 24px rgba(236,217,156,.35); }
+/* Modo kiosco (js/config.js): sin descargar ni compartir */
+.is-kiosk .share-only { display: none !important; }
+
 /* QR para llevarse la imagen al móvil */
 .qr {
   display: flex; align-items: center; gap: 18px; text-align: left;
@@ -351,9 +354,11 @@ button { font: inherit; color: inherit; }
   display: flex; align-items: center; justify-content: center; gap: 18px;
   padding: 32px 16px 48px; border-top: 1px solid rgba(197,175,95,.18); text-align: left;
 }
+.footer__covers { display: flex; gap: 8px; flex: none; }
 .footer__cover { width: 64px; border: 1px solid var(--gold-dim); }
-.footer__title { margin: 0; font-family: var(--f-title); color: var(--gold-light); font-size: .95rem; letter-spacing: .06em; }
-.footer__by { margin: 0; color: var(--muted); font-size: 1rem; }
+.footer__title { margin: 0 0 2px; font-family: var(--f-title); color: var(--gold-light); font-size: .95rem; letter-spacing: .06em; }
+.footer__by { margin: 4px 0 0; color: var(--muted); font-size: 1rem; }
+@media (max-width: 559px) { .footer { flex-direction: column; text-align: center; gap: 14px; } }
 
 /* Tablet vertical: rueda arriba y 12 signos en 2 filas de 6 (cabe en una pantalla) */
 @media (min-width: 640px) {

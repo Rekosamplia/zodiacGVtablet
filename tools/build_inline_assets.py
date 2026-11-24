@@ -6,7 +6,8 @@ from PIL import Image
 A = Path(__file__).resolve().parents[1] / "assets"
 spec = {"logo": ("logo-zodiac-academy.png", 1400, "PNG"), "wheel": ("rueda-zodiacal.png", 1400, "PNG"),
         "wheelCenter": ("rueda-centro.png", 1400, "PNG"), "wheelRing": ("rueda-anillo.png", 1400, "PNG"),
-        "dragon": ("dragon.png", 500, "PNG"), "stars": ("estrellas.png", 1800, "PNG"), "cover": ("portada-libro.jpg", 400, "JPEG")}
+        "dragon": ("dragon.png", 500, "PNG"), "stars": ("estrellas.png", 1800, "PNG"), "cover": ("portada-libro.jpg", 400, "JPEG"),
+        "cover2": ("portada-libro-2.jpg", 400, "JPEG")}
 out = {}
 for key, (fn, w, fmt) in spec.items():
     im = Image.open(A / fn)
